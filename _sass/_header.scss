@@ -1,0 +1,47 @@
+.header {
+    margin-top: 20px;
+
+    @media only screen and (min-width:768px) {
+        margin-top: 25px
+    }
+
+    @media only screen and (min-width:1220px) {
+        margin-top: 30px
+    }
+
+    &__logo {
+        display: block;
+        width: 200px;
+        max-width: 80%;
+
+        @media only screen and (min-width:768px) {
+            max-width: 50%
+        }
+
+        &__img {
+            width: 100%;
+            height: auto
+        }
+
+    }
+
+    &__title {
+        font-size: 25px;
+        font-weight: 700;
+        letter-spacing: -.02em;
+        line-height: 1;
+        color: #2A2F36;
+
+        @media only screen and (min-width:768px) {
+            font-size: 30px
+        }
+
+        @media only screen and (min-width:1220px) {
+            font-size: 35px
+        }
+
+        &:hover {
+            color: #3498db
+        }
+    }
+}

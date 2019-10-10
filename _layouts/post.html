@@ -1,0 +1,21 @@
+---
+layout: default
+---
+
+{%- assign config = site.data.config -%}
+<section class="hero hero--single">
+<div class="hero__image" style="background-image: url({{ page.image }})">
+<div class="hero__overlay"></div>
+</div>
+<div class="wrap">
+<h1>{{ page.title }}</h1>
+<p>{{ page.date | date: config.date_format }}</p>
+</div>
+</section>
+<section class="single">
+<div class="wrap">
+<article class="single-post">
+{{ content }}
+</article>
+</div>
+</section>

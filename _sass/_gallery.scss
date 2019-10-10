@@ -1,0 +1,127 @@
+.gallery {
+    visibility: hidden;
+    position: relative;
+    margin: 20px auto;
+
+    @media only screen and (min-width:768px) {
+        margin: 30px auto
+    }
+
+    @media only screen and (min-width:1220px) {
+        margin: 40px auto
+    }
+
+
+    &:first-child {
+        margin-top: 0
+    }
+
+    &--on {
+        visibility: visible
+    }
+
+    &__item {
+        position: relative;
+
+        img {
+            width: 100%
+        }
+    }
+
+    &--carousel &__item__link {
+        display: block;
+        pointer-events: none
+    }
+
+    &--carousel .owl-nav {
+        display: none
+    }
+
+    &--carousel .owl-dots {
+        margin-top: 20px;
+        text-align: center
+    }
+
+    &--carousel .owl-dots .owl-dot {
+        display: inline-block;
+        margin: 0 3px;
+        width: 12px;
+        height: 12px;
+        border: 0;
+        border-radius: 100%;
+        background: #ABB7B7;
+        -webkit-transition: all .2s ease-in-out;
+        -moz-transition: all .2s ease-in-out;
+        -ms-transition: all .2s ease-in-out;
+        -o-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+        cursor: pointer;
+        outline: 0
+    }
+
+    &--carousel .owl-dots .owl-dot.active {
+        background: #3498db
+    }
+
+    &--grid &__wrap {
+        margin-left: -5px;
+        margin-right: -5px
+    }
+
+    &--grid &__item {
+        float: left;
+        width: 50%;
+        padding: 5px
+    }
+
+    &--grid &__item__link {
+        display: block;
+        cursor: zoom-in
+    }
+
+    &--grid &__item__link .fluidbox__ghost {
+        -webkit-backface-visibility: hidden
+    }
+
+    &--grid[data-columns="3"] &__item {
+        width: 33.33%
+    }
+
+    &--grid[data-columns="4"] &__item {
+        width: 33.33%;
+
+        @media only screen and (min-width:768px) {
+            width: 25%
+        }
+
+    }
+
+    &--grid[data-columns="5"] &__item {
+        width: 33.33%;
+
+        @media only screen and (min-width:768px) {
+            width: 25%
+        }
+
+        @media only screen and (min-width:1024px) {
+            width: 20%
+        }
+
+    }
+
+    &--grid[data-columns="6"] &__item {
+        width: 33.33%;
+
+        @media only screen and (min-width:768px) {
+            width: 25%
+        }
+
+        @media only screen and (min-width:1024px) {
+            width: 20%
+        }
+
+        @media only screen and (min-width:1220px) {
+            width: 16.66%
+        }
+    }
+}

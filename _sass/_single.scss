@@ -1,0 +1,156 @@
+.single {
+    margin-top: 0;
+    padding-bottom: 40px;
+    background: #f4f5f6;
+
+    @media only screen and (min-width:768px) {
+        padding-bottom: 60px
+    }
+
+    @media only screen and (min-width:1220px) {
+        padding-bottom: 80px
+    }
+
+    &-post {
+        position: relative;
+        margin-top: -40px;
+        background: #fff;
+        padding: 16px 20px;
+        -webkit-box-shadow: 0 6px 16px rgba(0, 0, 0, .05);
+        -moz-box-shadow: 0 6px 16px rgba(0, 0, 0, .05);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, .05);
+
+        @media only screen and (min-width:768px) {
+            margin-top: -60px;
+            padding: 32px 40px;
+            -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, .05);
+            -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, .05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, .05)
+        }
+
+        @media only screen and (min-width:1024px) {
+            padding: 50px 60px
+        }
+
+        @media only screen and (min-width:1220px) {
+            padding: 70px 80px;
+            -webkit-box-shadow: 0 14px 26px rgba(0, 0, 0, .05);
+            -moz-box-shadow: 0 14px 26px rgba(0, 0, 0, .05);
+            box-shadow: 0 14px 26px rgba(0, 0, 0, .05)
+        }
+
+        hr {
+            margin: 30px auto;
+
+            @media only screen and (min-width:768px) {
+                margin-top: 40px;
+                margin-bottom: 40px
+            }
+        }
+
+        blockquote,
+        figure {
+            margin: 20px auto;
+
+            @media only screen and (min-width:768px) {
+                margin: 30px auto
+            }
+
+            @media only screen and (min-width:1220px) {
+                margin: 40px auto
+            }
+        }
+
+        blockquote p {
+            max-width: 100%;
+            padding: 0
+        }
+
+        p a {
+            font-weight: 600;
+            border-bottom: 2px solid #3498db
+        }
+
+        p .button {
+            margin-top: 10px
+        }
+
+        .highlighter-rouge,
+        table {
+            margin: 20px auto;
+            width: 100%;
+
+            @media only screen and (min-width:768px) {
+                margin: 30px auto
+            }
+
+            @media only screen and (min-width:1220px) {
+                margin: 40px auto
+            }
+        }
+
+        .single-post .highlight {
+            display: block;
+            padding: 0;
+            line-height: 1.5;
+            font-size: 15.3px;
+            line-height: 1.6;
+            overflow: auto;
+
+            @media only screen and (min-width:768px) {
+                font-size: 17px
+            }
+
+            @media only screen and (min-width:1220px) {
+                font-size: 18.7px
+            }
+        }
+
+        .single-post .highlight .highlight {
+            padding: 20px;
+
+            @media only screen and (min-width:768px) {
+                padding: 30px
+            }
+
+            @media only screen and (min-width:1220px) {
+                padding: 40px
+            }
+        }
+
+        table {
+            border: 2px solid #2A2F36;
+
+            thead {
+                background: #2A2F36;
+                color: #fff;
+                text-align: left;
+                font-weight: 600;
+
+                th {
+                    font-weight: 600
+                }
+            }
+
+            td,
+            th {
+                padding: 10px;
+                font-size: 18px;
+                font-weight: 400;
+
+                @media only screen and (min-width:768px) {
+                    padding: 15px
+                }
+
+                @media only screen and (min-width:1220px) {
+                    padding: 20px;
+                    font-size: 20px
+                }
+            }
+
+            tr:nth-child(2n) {
+                background: #f4f5f6
+            }
+        }
+    }
+}

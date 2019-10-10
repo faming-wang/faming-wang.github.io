@@ -1,0 +1,10 @@
+{%- assign socials = site.data.socials -%}
+<ul class="socials">
+{%- for social in socials -%}
+<li class="socials__item">
+<a href="{{ social.url | escape }}" target="_blank" class="socials__item__link" title="{{ social.title }}">
+<i class="fab {{ social.icon }}" aria-hidden="true"></i>
+</a>
+</li>
+{%- endfor -%}
+</ul>

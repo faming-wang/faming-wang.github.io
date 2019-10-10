@@ -1,0 +1,52 @@
+
+include: ["_pages"]
+exclude:
+- .sass-cache/
+- .jekyll-cache/
+- gemfiles/
+- Gemfile
+- Gemfile.lock
+- node_modules/
+- vendor/bundle/
+- vendor/cache/
+- vendor/gems/
+- vendor/ruby/
+- README.md
+
+plugins:
+- jekyll-paginate
+
+style: compressed
+sass:
+  style: compressed
+
+markdown: kramdown
+
+paginate: 6
+paginate_path: blog/page:num
+
+collections:
+  posts:
+    output: true
+    permalink: /blog/:categories/:title
+  projects:
+    output: true
+    permalink: /project/:title
+    sort_by: date
+
+defaults:
+  - scope:
+      path: "" # an empty string here means all files in the project
+      type: "projects"
+    values:
+      layout: "work"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"

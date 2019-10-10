@@ -1,0 +1,38 @@
+.pagination {
+    margin-top: 30px;
+
+    @media only screen and (min-width:1024px) {
+        margin-top: 60px
+    }
+
+    &__next,
+    &__prev {
+        width: 50%;
+        padding: 20px;
+        border: 0;
+
+        @media only screen and (min-width:768px) {
+            padding: 30px;
+            font-size: 18px
+        }
+
+        @media only screen and (min-width:1220px) {
+            font-size: 20px
+        }
+
+        &:hover {
+            background: #3498db
+        }
+    }
+
+    &__prev {
+        float: left;
+        background: #6C7A89
+    }
+
+    &__next {
+        float: right;
+        text-align: right;
+        background: #2A2F36
+    }
+}

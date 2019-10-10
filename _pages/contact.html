@@ -1,0 +1,47 @@
+---
+title: Contact
+permalink: /contact
+image: /images/contact.jpg
+subtitle: 有朋自远方来，不亦乐乎?
+description: 
+---
+<section class="hero hero--single">
+<div class="hero__image" style="background-image: url({{ page.image }})">
+<div class="hero__overlay"></div>
+</div>
+<div class="wrap">
+<h1>{{ page.subtitle }}</h1>
+<p>{{ page.description }}</p>
+</div>
+</section>
+{%- assign config = site.data.config -%}
+<section class="single">
+<div class="wrap">
+<article class="single-post">
+<div class="contact-form">
+<form method="post" action="https://formspree.io/{{ config.email }}" id="contact-form">
+<div class="contact-form__item">
+<label class="contact-form__label">邮件地址 *</label>
+<input type="text" name="email" placeholder="您的邮件地址..." class="contact-form__input" />
+</div>
+<div class="contact-form__item">
+<label class="contact-form__label">姓名 *</label>
+<input type="text" name="name" placeholder="您的姓名..." class="contact-form__input" />
+</div>
+<div class="contact-form__item">
+<label class="contact-form__label">信息 *</label>
+<textarea name="message" placeholder="您的信息..." class="contact-form__textarea"></textarea>
+</div>
+
+<input type="hidden" name="_next" value="/thanks" />
+<input type="hidden" name="_subject" value="Contact form submission" />
+<input type="text" name="_gotcha" style="display: none;" class="contact-form__gotcha" val="" />
+
+<div class="contact-form__item">
+<input type="submit" value="发送信息" class="button button--large" />
+</div>
+</form>
+</div>
+</article>
+</div>
+</section>

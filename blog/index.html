@@ -1,0 +1,46 @@
+---
+title: Blog
+layout: blog
+image: /images/blog.jpg
+subtitle: 学而时习之，不亦说乎?
+description: 这里有一些关于编程的知识，可能你会受益匪浅
+---
+
+<section class="listing">
+<div class="wrap">
+{%- for post in paginator.posts -%}
+<article class="post">
+<div class="post__image-wrap">
+<div class="post__image" style="background-image: url({{ post.image }})"></div>
+</div>
+<div class="post__content-wrap">
+<div class="post__content">
+<h2 class="post__title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+<p class="post__subtitle">{{ post.subtitle }}</p>
+<p class="post__description">{{ post.description }}</p>
+</div>
+</div>
+</article>
+{%- endfor -%}
+</div>
+</section>
+{%- if paginator.total_pages > 1 -%}
+<!-- pagination -->
+<section class="pagination">
+<div class="wrap">
+{%- if paginator.previous_page -%}
+<a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="button pagination__prev">
+<i class="fa fa-arrow-left" aria-hidden="true"></i>
+<span>较新的帖子</span>
+</a>
+{%- endif -%}
+
+{%- if paginator.next_page -%}
+<a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="button pagination__next">
+<span>较旧的贴子</span>
+<i class="fa fa-arrow-right" aria-hidden="true"></i>
+</a>
+{%- endif -%}
+</div>
+</section>
+{%- endif -%}

@@ -1,0 +1,105 @@
+.fluidbox {
+    outline: 0;
+
+    &__overlay {
+        background-color: rgba(255, 255, 255, .85);
+        cursor: pointer;
+        cursor: zoom-out;
+        opacity: 0;
+        pointer-events: none;
+        position: fixed;
+        top: -100%;
+        left: 0;
+        bottom: -100%;
+        right: 0;
+        -webkit-transition: all .25s ease-in-out;
+        transition: all .25s ease-in-out
+    }
+
+    &--opened &__overlay {
+        pointer-events: auto
+    }
+
+    &__wrap {
+        background-position: center center;
+        background-size: cover;
+        margin: 0 auto;
+        position: relative;
+        -webkit-transition: all .25s ease-in-out;
+        transition: all .25s ease-in-out
+    }
+
+    &--closed &__thumb,
+    &__thumb {
+        -webkit-transition: opacity 0s ease-in-out 0s;
+        transition: opacity 0s ease-in-out 0s
+    }
+
+    &__ghost {
+        background-size: 100% 100%;
+        background-position: center center;
+        background-repeat: no-repeat;
+        position: absolute;
+        -webkit-transition: opacity 0s 0s, -webkit-transform .25s 0s;
+        transition: opacity 0s 0s, -webkit-transform .25s 0s;
+        transition: opacity 0s 0s, transform .25s 0s;
+        transition: opacity 0s 0s, transform .25s 0s, -webkit-transform .25s 0s
+    }
+
+    &--opened &__ghost {
+        cursor: pointer;
+        cursor: zoom-out
+    }
+
+    &--closed &__ghost {
+        -webkit-transition: opacity 0s .25s, -webkit-transform .25s 0s;
+        transition: opacity 0s .25s, -webkit-transform .25s 0s;
+        transition: opacity 0s .25s, transform .25s 0s;
+        transition: opacity 0s .25s, transform .25s 0s, -webkit-transform .25s 0s
+    }
+
+    &__loader {
+        opacity: 0;
+        -webkit-perspective: 200px;
+        perspective: 200px;
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+
+        &:before {
+            background-color: rgba(255, 255, 255, .85);
+            content: '';
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20%;
+            padding-bottom: 20%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            -webkit-transition-property: -webkit-transform;
+            transition-property: -webkit-transform;
+            transition-property: transform;
+            transition-property: transform, -webkit-transform;
+            -webkit-transition-duration: .25s;
+            transition-duration: .25s;
+            -webkit-transition-delay: 0s;
+            transition-delay: 0s
+        }
+    }
+
+    &--loading &__loader {
+        opacity: 1;
+        -webkit-transition: opacity .25s ease-in-out .25s;
+        transition: opacity .25s ease-in-out .25s
+    }
+
+    &--loading &__loader:before {
+        -webkit-animation: a 1s 0s infinite ease-in-out forwards;
+        animation: a 1s 0s infinite ease-in-out forwards
+    }
+}

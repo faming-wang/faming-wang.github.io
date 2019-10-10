@@ -1,0 +1,23 @@
+<header class="header">
+<!-- header -->
+<div class="wrap">
+<a href="{{ "/" | relative_url }}" class="header__title">{{ config.author }}</a>
+<div class="menu">
+<div class="menu__toggle js-menu-toggle">
+<div class="menu__toggle__icon">
+<span></span>
+</div>
+</div>
+<div class="menu__wrap">
+<ul class="menu__list">
+{%- assign menu_list = config.header_menu -%}
+{%- for menu in menu_list -%}
+<li class="menu__list__item">
+<a href="{{ menu.url | relative_url }}" class="menu__list__item__link ">{{ menu.title }}</a>
+</li>
+{%- endfor -%}
+</ul>
+</div>
+</div>
+</div>
+</header>

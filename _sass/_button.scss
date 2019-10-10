@@ -1,0 +1,63 @@
+.button {
+    display: inline-block;
+    padding: 9px 10px 10px;
+    font-size: 13px;
+    line-height: 1;
+    border: 2px solid #3498db;
+    background: #3498db;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0;
+    cursor: pointer;
+
+    @media only screen and (min-width:768px) {
+        padding: 11px 20px 12px;
+        font-size: 15px
+    }
+
+    &:hover {
+        background: #346edb;
+        border-color: #346edb;
+        color: #fff
+    }
+
+    svg {
+        margin-right: 5px;
+
+        @media only screen and (min-width:768px) {
+            margin-right: 8px
+        }
+
+        &:last-child {
+            margin-right: 0;
+            margin-left: 5px;
+
+            @media only screen and (min-width:768px) {
+                margin-right: 0;
+                margin-left: 8px
+            }
+        }
+    }
+
+    &--large {
+        padding: 15px 20px 16px;
+        font-size: 13px;
+
+        @media only screen and (min-width:768px) {
+            padding: 19px 40px 20px;
+            font-size: 17px
+        }
+    }
+
+    &--light {
+        background: 0 0;
+        border-color: #2A2F36;
+        color: #2A2F36;
+
+        &:hover {
+            background: #3498db;
+            border-color: #3498db;
+            color: #fff
+        }
+    }
+}

@@ -1,0 +1,20 @@
+# custom config 
+header_menu:
+- title: 项目
+  url: /
+- title: 博客
+  url: /blog/
+- title: 关于
+  url: /about
+- title: 联系
+  url: /contact
+
+date_format: "%Y年%m月%d日"
+
+lang: zh
+title: Pat.Wang's Personal Website
+email: wang_faming@live.com
+author: Pat.Wang
+description: 汪发明个人网站。
+logo: '/images/logo.png'
+google_analytics: 'UA-46278016-1'

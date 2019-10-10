@@ -1,0 +1,11 @@
+<footer class="footer">
+<!-- footer -->
+<div class="wrap">
+<p class="footer__text">{{ config.description }}</p>
+<div class="footer__copyright">
+<span>&copy;{{ 'now' | date: "%Y" }} {{ config.author | escape }}</span>
+<a href="{{ site.url | absolute_url }}" target="_blank">{{ config.title }}</a>
+</div>
+{%- include social.html -%}
+</div>
+</footer>
