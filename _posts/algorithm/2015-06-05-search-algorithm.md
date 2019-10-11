@@ -20,10 +20,11 @@ categories: [algorithm]
 ##### C++示例
 
 ~~~ cpp
+#include <iostream>
+
 template <class Container, class CType>
 int linear_search (const Container& data, int size, const CType& key)
 {
-    // double 类型查找可能受精度的影响
     for (int i = 0; i < size; ++i)
         if (data[i] == key)
             return i;
@@ -62,10 +63,11 @@ int main(int argc, char** argv)
 ##### C++示例
 
 ~~~ cpp
+#include <iostream>
+
 template <class Container, class CType>
 int binary_search (const Container& data, int size, const CType& key)
 {
-    // double 类型查找可能受精度的影响
     int left = 0;
     int right = size - 1;
     while (left <= right) {
@@ -87,7 +89,7 @@ int main(int argc, char** argv)
         // 数据必须有序
         const int data[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
         const int length = int(sizeof(data) / sizeof(*data));
-        const auto fined = linear_search(data, length, key);
+        const auto fined = binary_search(data, length, key);
         std::cout << fined << std::endl;
     }
     {
@@ -95,7 +97,7 @@ int main(int argc, char** argv)
         // 数据必须有序
         const double data[] = { 1.1, 1.2, 2.1, 2.2, 3.1, 3.2, 4.1, 4.2, 5.1, 5.2, 6.1, 6.2, 7.1, 7.2, 8.1, 8.2 };
         const int length = int(sizeof(data) / sizeof(*data));
-        const auto fined = linear_search(data, length, key);
+        const auto fined = binary_search(data, length, key);
         std::cout << fined << std::endl;
     }
     system("pause");
