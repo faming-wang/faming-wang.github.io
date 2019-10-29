@@ -42,7 +42,7 @@ mkdir out
 cd out
 cmake .. -D Qt5_DIR=[you qt lib root path]/lib/cmake/Qt5
 ~~~
-On Window
+On Windows
 ~~~
 msbuild QTeamSpeak3.sln /property:Configuration=Debug /property:Platform="Win32"
 msbuild QTeamSpeak3.sln /property:Configuration=Release /property:Platform="Win32"
