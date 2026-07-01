@@ -1,0 +1,128 @@
+---
+layout: default
+title: 标签
+permalink: /tags.html
+---
+
+<section class="page-hero">
+  <div class="container">
+    <p class="hero-eyebrow">分类索引</p>
+    <h1 class="page-title">按标签浏览</h1>
+    <p class="page-sub">从系统架构到语言特性，按主题找到你感兴趣的内容。</p>
+  </div>
+</section>
+
+<section class="section tags-layout-section">
+  <div class="container">
+    <div class="tags-layout">
+      <!-- 左侧：标签云 -->
+      <aside class="tags-sidebar">
+        <div class="tags-cloud" id="tagsCloud">
+          {% assign all_tags = "" | split: "" %}
+          {% for post in site.posts %}
+            {% for tag in post.tags %}
+              {% assign all_tags = all_tags | push: tag %}
+            {% endfor %}
+          {% endfor %}
+          {% assign unique_tags = all_tags | uniq | sort %}
+
+          {% assign tag_categories = "语言与框架:C++,Qt,TypeScript,React,Python,Rust,Linux|系统与架构:系统设计,系统编程,操作系统,分布式,并发|工程实践:工程实践,代码质量,Git,Docker,DevOps|前端开发:前端" | split: "|" %}
+
+          {% for cat_item in tag_categories %}
+            {% assign cat_parts = cat_item | split: ":" %}
+            {% assign cat_name = cat_parts[0] %}
+            {% assign cat_tags = cat_parts[1] | split: "," %}
+            <div class="tag-group">
+              <h3 class="tag-group-title">{{ cat_name }}</h3>
+              <div class="tag-chips">
+                {% for ct in cat_tags %}
+                  {% if unique_tags contains ct %}
+                    <button class="tag-chip" onclick="showTagPosts(this, '{{ ct }}')">{{ ct }}</button>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </aside>
+
+      <!-- 右侧：筛选结果 -->
+      <main class="tags-main">
+        <div class="tags-results-empty" id="tagEmpty">
+          <div class="tags-empty-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/>
+              <line x1="7" y1="7" x2="7.01" y2="7"/>
+            </svg>
+          </div>
+          <p class="tags-empty-title">选择标签以浏览文章</p>
+          <p class="tags-empty-desc">从左侧标签中点击任意主题，相关文章将出现在这里。</p>
+        </div>
+        <div class="tags-results" id="tagResults" style="display:none">
+          <div class="section-header">
+            <h2 class="section-title" id="tagSectionTitle"></h2>
+            <button class="section-link" onclick="clearTagFilter()">清除筛选</button>
+          </div>
+          <div class="posts-list" id="tagPostsList"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  window._postsData = [
+    {% for post in site.posts %}
+    {
+      title: "{{ post.title | escape }}",
+      url: "{{ post.url | relative_url }}",
+      excerpt: "{{ post.excerpt | strip_html | truncate: 120 | escape }}",
+      date: "{{ post.date | date: '%Y-%m-%d' }}",
+      read_time: "{{ post.read_time }}",
+      tags: [{% for tag in post.tags %}"{{ tag }}"{% unless forloop.last %},{% endunless %}{% endfor %}],
+      cover: "{{ post.cover }}",
+      cover_text: "{{ post.cover_text }}"
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
+
+  window.showTagPosts = function(btn, tag) {
+    var empty = document.getElementById('tagEmpty');
+    var results = document.getElementById('tagResults');
+    var title = document.getElementById('tagSectionTitle');
+    var list = document.getElementById('tagPostsList');
+
+    // 隐藏空状态，显示结果
+    empty.style.display = 'none';
+    results.style.display = '';
+    title.textContent = '标签：' + tag;
+
+    // 高亮当前按钮
+    document.querySelectorAll('.tag-chip').forEach(function(c){ c.classList.remove('active'); });
+    btn.classList.add('active');
+
+    // 渲染筛选结果
+    var filtered = window._postsData.filter(function(p){ return p.tags.indexOf(tag) >= 0; });
+    list.innerHTML = filtered.map(function(p, i){
+      return '<article class="post-item anim-fade-up delay-' + (i + 1) + '" onclick="location.href=\'' + p.url + '\'">' +
+        '<div class="post-item-left"><div class="post-item-cover ' + p.cover + '"><span>' + p.cover_text + '</span></div></div>' +
+        '<div class="post-item-main"><div class="post-item-header"><h3 class="post-item-title"><a href="' + p.url + '">' + p.title + '</a></h3>' +
+        '<div class="post-item-tags">' + p.tags.map(function(t){ return '<span class="post-tag">' + t + '</span>'; }).join('') + '</div></div>' +
+        '<p class="post-item-excerpt">' + p.excerpt + '</p>' +
+        '<div class="post-item-meta"><span class="post-date">' + p.date + '</span><span class="post-sep">&middot;</span><span class="post-readtime">' + p.read_time + '</span></div></div></article>';
+    }).join('');
+
+    // 触发滚动动画
+    if (window.observeAnimations) {
+      setTimeout(function(){ window.observeAnimations(document.body); }, 50);
+    }
+  };
+
+  window.clearTagFilter = function() {
+    document.getElementById('tagEmpty').style.display = '';
+    document.getElementById('tagResults').style.display = 'none';
+    document.querySelectorAll('.tag-chip').forEach(function(c){ c.classList.remove('active'); });
+  };
+})();
+</script>

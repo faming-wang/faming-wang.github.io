@@ -1,0 +1,94 @@
+---
+layout: default
+---
+
+<div class="post-hero" style="background: linear-gradient(135deg, var(--c-accent), #34aadc);">
+  <div class="post-hero-inner">
+    <p class="post-hero-meta">{{ page.date | date: "%Y-%m-%d" }} &middot; {{ page.read_time }}</p>
+    <h1 class="post-hero-title">{{ page.title }}</h1>
+    {% if page.tags %}
+    <div class="post-hero-tags">
+      {% for tag in page.tags %}
+      <span class="post-hero-tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="post-layout" id="postLayout">
+  <article class="post-article" id="postArticle">
+    {{ content }}
+  </article>
+  <aside class="post-sidebar" id="postSidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">目录</div>
+      <nav class="toc-list" id="postToc"></nav>
+    </div>
+  </aside>
+</div>
+
+<script>
+(function(){
+  var toc = document.getElementById('postToc');
+  var sidebar = document.getElementById('postSidebar');
+  var article = document.getElementById('postArticle');
+  if (!toc || !article) return;
+  var headings = article.querySelectorAll('h1, h2, h3, h4');
+  if (headings.length === 0) { sidebar.style.display = 'none'; return; }
+  headings.forEach(function(h, i){
+    var id = 'heading-' + i;
+    h.id = id;
+    var level = parseInt(h.tagName.charAt(1));
+    var el = document.createElement('a');
+    el.className = 'toc-item toc-h' + level;
+    el.href = '#' + id;
+    el.textContent = h.textContent;
+    toc.appendChild(el);
+  });
+
+  // Scroll-spy: highlight current TOC item
+  var tocItems = toc.querySelectorAll('.toc-item');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      var id = entry.target.id;
+      var link = toc.querySelector('[href="#' + id + '"]');
+      if (!link) return;
+      if (entry.isIntersecting) {
+        tocItems.forEach(function(t){ t.classList.remove('active'); });
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-80px 0px -70% 0px' });
+
+  headings.forEach(function(h){ observer.observe(h); });
+
+  // Copy buttons for code blocks
+  var pres = article.querySelectorAll('pre');
+  pres.forEach(function(pre){
+    var wrapper = document.createElement('div');
+    wrapper.className = 'code-block-wrapper';
+    pre.parentNode.insertBefore(wrapper, pre);
+    wrapper.appendChild(pre);
+    var btn = document.createElement('button');
+    btn.className = 'code-copy-btn';
+    btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+    btn.title = '复制代码';
+    btn.addEventListener('click', function(){
+      var code = pre.textContent;
+      navigator.clipboard.writeText(code).then(function(){
+        btn.classList.add('copied');
+        btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+        setTimeout(function(){
+          btn.classList.remove('copied');
+          btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+        }, 2000);
+      }).catch(function(){
+        btn.textContent = '失败';
+        setTimeout(function(){ btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>'; }, 2000);
+      });
+    });
+    wrapper.appendChild(btn);
+  });
+})();
+</script>

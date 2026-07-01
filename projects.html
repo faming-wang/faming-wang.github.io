@@ -1,0 +1,93 @@
+---
+layout: default
+title: 项目
+permalink: /projects.html
+---
+
+<section class="page-hero">
+  <div class="container">
+    <p class="hero-eyebrow">Open Source</p>
+    <h1 class="page-title anim-fade-up delay-1">开源项目</h1>
+    <p class="page-sub anim-fade-up delay-2">我参与开发和维护的开源项目。每一行代码，都是对工程品质的追求。</p>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<section class="section">
+  <div class="container">
+    <div class="filter-tags" id="projectFilters">
+      <button class="filter-tag active" onclick="filterProjects('全部')">全部</button>
+      {% assign all_project_tags = "" | split: "" %}
+      {% for project in site.projects %}
+        {% for tag in project.tags %}
+          {% assign all_project_tags = all_project_tags | push: tag %}
+        {% endfor %}
+      {% endfor %}
+      {% assign unique_project_tags = all_project_tags | uniq | sort %}
+      {% for tag in unique_project_tags %}
+        <button class="filter-tag" onclick="filterProjects('{{ tag }}')">{{ tag }}</button>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT GRID -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="project-grid" id="projectGrid">
+      {% for project in site.projects %}
+        <article class="project-card anim-fade-up delay-{{ forloop.index | modulo: 6 | plus: 1 }}"
+                 data-tags="{{ project.tags | join: ',' }}">
+          <div class="project-card-cover {{ project.color }}">
+            <span class="project-card-emoji">{{ project.name | slice: 0 }}</span>
+            <div class="project-card-badge">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            </div>
+          </div>
+          <div class="project-card-body">
+            <h3 class="project-card-name">{{ project.name }}</h3>
+            <p class="project-card-tagline">{{ project.tagline }}</p>
+            <p class="project-card-desc">{{ project.description }}</p>
+            <div class="project-card-tech">
+              {% for tech in project.tech %}
+                <span class="project-tech-tag">{{ tech }}</span>
+              {% endfor %}
+            </div>
+            <div class="project-card-footer">
+              <div class="project-card-stats">
+                <span class="project-stat">
+                  <span class="project-stat-dot" style="background: {{ project.lang_color }}"></span>
+                  {{ project.language }}
+                </span>
+                <span class="project-stat">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1.5 L10.5 6.5 L16 7.3 L12 11.2 L13 16.7 L8 14 L3 16.7 L4 11.2 L0 7.3 L5.5 6.5 Z"/></svg>
+                  {{ project.stars }}
+                </span>
+              </div>
+              <a href="{{ project.url }}" class="project-card-link" target="_blank" rel="noopener">
+                查看项目
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4 L12 4 L12 10 M11.5 4.5 L4 12"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script>
+function filterProjects(tag) {
+  document.querySelectorAll('#projectFilters .filter-tag').forEach(function(btn){
+    btn.classList.toggle('active', btn.textContent.trim() === tag);
+  });
+  document.querySelectorAll('#projectGrid .project-card').forEach(function(card){
+    if (tag === '全部') {
+      card.style.display = '';
+    } else {
+      var tags = card.getAttribute('data-tags') || '';
+      card.style.display = tags.split(',').indexOf(tag) >= 0 ? '' : 'none';
+    }
+  });
+}
+</script>

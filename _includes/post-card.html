@@ -1,0 +1,33 @@
+<article class="post-item anim-fade-up delay-{{ include.delay }}"
+         data-tags="{{ include.tags }}"
+         onclick="location.href='{{ include.url }}'">
+  <div class="post-item-left">
+    <div class="post-item-cover {{ include.cover }}">
+      <span>{{ include.cover_text }}</span>
+    </div>
+    <div class="post-item-meta-mobile">
+      <span class="post-date">{{ include.date }}</span>
+      <span class="post-readtime">{{ include.read_time }}</span>
+    </div>
+  </div>
+  <div class="post-item-main">
+    <div class="post-item-header">
+      <h3 class="post-item-title">
+        <a href="{{ include.url }}">{{ include.title }}</a>
+      </h3>
+      <div class="post-item-tags">
+        {% assign tag_arr = include.tags | split: "," %}
+        {% for tag in tag_arr %}
+          {% assign t = tag | strip %}
+          <span class="post-tag">{{ t }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    <p class="post-item-excerpt">{{ include.excerpt }}</p>
+    <div class="post-item-meta">
+      <span class="post-date">{{ include.date }}</span>
+      <span class="post-sep">&middot;</span>
+      <span class="post-readtime">{{ include.read_time }}</span>
+    </div>
+  </div>
+</article>

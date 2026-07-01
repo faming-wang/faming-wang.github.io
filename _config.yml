@@ -1,0 +1,46 @@
+title: DevLog
+description: 软件开发工程师的技术博客 — 分享编程、架构与工程实践
+url: "https://yourusername.github.io"
+baseurl: ""
+author: Software Engineer
+lang: zh-CN
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Collections
+collections:
+  projects:
+    output: false
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post
+      permalink: /post/:title/
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: page
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - .nojekyll
+  - assets/js/data.js
+  - vendor/
+
+# RSS feed
+plugins:
+  - jekyll-feed
